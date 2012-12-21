@@ -93,11 +93,11 @@
 	}
 
 	
-.form-horizontal .control-label {
+.form-horizontal .control-label .author {
 	width: 90px;
 	}
 
-.form-horizontal .form-actions {
+.form-horizontal .form-actions .author {
 	padding-left: 100px;
 	}
 	
@@ -122,15 +122,15 @@
 	}
 	
 
-.form-horizontal .controls {
+.form-horizontal .controls .author {
 	margin-left: 0px;
 	}
 	
-.form-horizontal .control-label {
+.form-horizontal .control-label .author {
 	width: 90px;
 	}
 
-.form-horizontal .form-actions {
+.form-horizontal .form-actions .author {
 	padding-left: 0px;
 	}
 	
