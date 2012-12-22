@@ -185,7 +185,14 @@ h2 {
 	padding: 1px 8px 2px;
 	}
 	
+/***** SCREENSHOTS *****/
+.thumbnails h3 {
+  text-align: center;
+}
 
+.thumbnails p {
+  padding: 0.5em;
+}
 	
 /***** CONTACT *****/
 
