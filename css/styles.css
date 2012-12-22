@@ -11,8 +11,14 @@
  /***** STRUCTURE *****/
  
  body { 
-	background: url('../img/bg.png') repeat-x;
-	background-color: #fff;
+  background: rgb(112,129,165); /* Old browsers */
+  background: -moz-linear-gradient(top,  rgba(112,129,165,1) 0%, rgba(254,255,255,1) 38%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(112,129,165,1)), color-stop(38%,rgba(254,255,255,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(112,129,165,1) 0%,rgba(254,255,255,1) 38%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(112,129,165,1) 0%,rgba(254,255,255,1) 38%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(112,129,165,1) 0%,rgba(254,255,255,1) 38%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(112,129,165,1) 0%,rgba(254,255,255,1) 38%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7081a5', endColorstr='#feffff',GradientType=0 ); /* IE6-9 */
 	}
 	
 h1, h2, h3, h4, h5, h6 {
