@@ -8,3 +8,16 @@
     font-style: normal;
 
 }
+
+@font-face {
+  font-family: DiavloBold;
+  font-weight: bold;
+  src: url('Diavlo_BOLD_II_37.otf'); /* A font by Jos Buivenga (exljbris) -> www.exljbris.com */
+}
+
+@font-face {
+  font-family: FontinRegular;
+  font-weight: normal;
+  src: url('Fontin-Regular.otf'); /* A font by Jos Buivenga (exljbris) -> www.exljbris.com */
+}
+
