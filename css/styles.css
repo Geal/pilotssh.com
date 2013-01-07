@@ -140,7 +140,11 @@ h2 {
 	line-height: 1.3em;
 	}
 	
-	
+.overlay {
+  opacity : 0.2;
+  filter: alpha(opacity=20); /* msie */
+  background-color: #000;
+}
 	
 /***** ABOUT PAGE *****/
 
