@@ -1,5 +1,5 @@
 $(function(){
-	$(".thumbnails a").attr('rel', 'gallery').fancybox();
+	$(".thumbnails a.thumbnail").attr('rel', 'gallery').fancybox();
 
 	$("#nav-list li.scroll, #scroll_up").click(function(e) {
 		e.preventDefault();
