@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+      http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+      xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+<url>
+  <loc>http://pilotssh.com/</loc>
+  <lastmod>2013-02-01T15:40:29+00:00</lastmod>
+  <image:image>
+    <image:loc>http://pilotssh.com/img/phones.png</image:loc>
+    <image:caption>SSH for iPhone - Pilot SSH</image:caption>
+  </image:image>
+</url>
+<url>
+  <loc>http://pilotssh.com/faq</loc>
+  <lastmod>2013-02-01T15:40:16+00:00</lastmod>
+</url>
+<url>
+  <loc>http://pilotssh.com/script/wordpress-admin</loc>
+  <lastmod>2013-02-01T15:40:37+00:00</lastmod>
+  <image:image>
+    <image:loc>http://pilotssh.com/img/wordpress.png</image:loc>
+    <image:caption>WordPress admin</image:caption>
+  </image:image>
+</url>
+<url>
+  <loc>http://pilotssh.com/script/process-list</loc>
+  <lastmod>2013-02-01T15:40:37+00:00</lastmod>
+  <image:image>
+    <image:loc>http://pilotssh.com/img/process_list.png</image:loc>
+    <image:caption>Process list</image:caption>
+  </image:image>
+</url>
+<url>
+  <loc>http://pilotssh.com/script/apache-configuration</loc>
+  <lastmod>2013-02-01T15:40:37+00:00</lastmod>
+  <image:image>
+    <image:loc>http://pilotssh.com/img/apaches_sites.png</image:loc>
+    <image:caption>Apache configuration</image:caption>
+  </image:image>
+</url>
+<url>
+  <loc>http://pilotssh.com/script/uptime</loc>
+  <lastmod>2013-02-01T15:40:37+00:00</lastmod>
+  <image:image>
+    <image:loc>http://pilotssh.com/img/power.png</image:loc>
+    <image:caption>Uptime</image:caption>
+  </image:image>
+</url>
+<url>
+  <loc>http://pilotssh.com/script/logs</loc>
+  <lastmod>2013-02-01T15:40:37+00:00</lastmod>
+  <image:image>
+    <image:loc>http://pilotssh.com/img/server_logs.png</image:loc>
+    <image:caption>Server logs</image:caption>
+  </image:image>
+</url>
+<url>
+  <loc>http://pilotssh.com/script/index</loc>
+  <lastmod>2013-02-01T15:40:37+00:00</lastmod>
+  <image:image>
+    <image:loc>http://pilotssh.com/img/index.png</image:loc>
+    <image:caption>Script index for Pilot SSH</image:caption>
+  </image:image>
+</url>
+</urlset>
