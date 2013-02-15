@@ -64,8 +64,8 @@
 	</div>
 </div>
 
-<div class="container content container-fluid" id="home">
-	<div class="row-fluid" itemscope itemtype="http://schema.org/SoftwareApplication">
+<div class="container content container-fluid" id="home" itemscope itemtype="http://schema.org/SoftwareApplication">
+	<div class="row-fluid">
 		<div class="span5 visible-desktop">
 			<img src="img/phones.png" alt="Pilot SSH for iPhone" itemprop="image">
 		</div>
@@ -91,8 +91,8 @@
 			</div>
 		
 			<div class="hidden-desktop" id="phones">
-				<img src="img/phones.png">
-			</div>
+				<img src="img/phones.png" itemprop="image">
+      </div>
             
 			<div id="description" itemprop="description">
         Restart servers, read logs, manage users and processes... With PilotSSH, everything can be done in a few touches! As powerful as a shell connection, but infinitely easier to use.
@@ -157,8 +157,8 @@
       </ul>
       <hr>
 
-      <h3 class="version">Version 1.0</h3>
-      <span class="release-date">January 14th, 2012</span>
+      <h3 class="version">Version <span itemprop="softwareVersion">1.0</span></h3>
+      <span class="release-date" itemprop="datePublished">January 14th, 2012</span>
       <ul>
         <li><span class="label label-info">NEW</span>Release of the iPhone/iPod application</li>
         <li><span class="label label-info">NEW</span>The Android application is in development</li>
@@ -186,7 +186,7 @@
 		<ul class="thumbnails">
 			<li class="span4">
 				<a href="img/wordpress.png" rel="gallery" class="thumbnail">
-				  <img src="img/wordpress.png" alt="WordPress Administration for iPhone">
+				  <img src="img/wordpress.png" alt="WordPress Administration for iPhone" itemprop="screenshot" />
         </a>
         <h3><a href="script/wordpress-admin">WordPress admin</a></h3>
         <p>Back up and restore your database, upgrade WordPress versions (or rollback to the previous working version). No need to edit the configuration file, the app asks directly for the configuration options.</p>
@@ -194,7 +194,7 @@
 
 			<li class="span4">
 				<a href="img/process_list.png" rel="gallery" class="thumbnail">
-				  <img src="img/process_list.png" alt="Process list" />
+				  <img src="img/process_list.png" alt="Process list" itemprop="screenshot" />
 				</a>
         <h3><a href="script/process-list">Process list</a></h3>
         <p>Display the list of running process, and kill one of them when touched</p>
@@ -202,7 +202,7 @@
 		
 			<li class="span4">
 				<a href="img/apache_sites.png" rel="gallery" class="thumbnail">
-				 <img src="img/apache_sites.png" alt="Apache configuration" />
+				 <img src="img/apache_sites.png" alt="Apache configuration" itemprop="screenshot" />
         </a>
         <h3><a href="script/apache-configuration">Apache sites</a></h3>
         <p>Show which sites are enabled in Apache. Enable and disable them with a touch</p>
@@ -213,7 +213,7 @@
 		<ul class="thumbnails">
 			<li class="span4">
 				<a href="img/power.png" rel="gallery" class="thumbnail">
-				  <img src="img/power.png" alt="Uptime">
+				  <img src="img/power.png" alt="Uptime" itemprop="screenshot" />
         </a>
         <h3><a href="script/uptime">Uptime</a></h3>
         <p>Display the uptime. Shut down and reboot the server</p>
@@ -221,7 +221,7 @@
 
 			<li class="span4">
 				<a href="img/server_logs.png" rel="gallery" class="thumbnail">
-				  <img src="img/server_logs.png" alt="Logs">
+				  <img src="img/server_logs.png" alt="Logs" itemprop="screenshot" />
 				</a>
         <h3><a href="script/logs">Logs</a></h3>
         <p>Show the server logs</p>
@@ -229,7 +229,7 @@
 
 			<li class="span4">
 				<a href="img/index.png" rel="gallery" class="thumbnail">
-				  <img src="img/index.png" alt="Script index for Pilot SSH">
+				  <img src="img/index.png" alt="Script index for Pilot SSH" itemprop="screenshot" />
 				</a>
         <h3><a href="script/index">Index</a></h3>
         <p>The first script called by Pilot SSH. Modify it to register your new scripts</p>
