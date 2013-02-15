@@ -138,7 +138,12 @@ h2 {
 	padding-right: 5%;
 	font-size: 0.9em;
 	line-height: 1.3em;
-	}
+}
+
+.productinfo {
+  padding-top: 10px;
+  line-height: 1.4em;
+}
 	
 .overlay {
   opacity : 0.2;
