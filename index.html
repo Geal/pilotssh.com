@@ -65,20 +65,20 @@
 </div>
 
 <div class="container content container-fluid" id="home">
-	<div class="row-fluid">
+	<div class="row-fluid" itemscope itemtype="http://schema.org/Product">
   
 		<div class="span5 visible-desktop">
-			<img src="img/phones.png" alt="Pilot SSH for iPhone">
+			<img src="img/phones.png" alt="Pilot SSH for iPhone" itemprop="image">
 		</div>
 	
 		<div class="span7">
 	
 			<div class="visible-desktop" id="icon">
-				<img src="img/app_icon.png" />
+				<img src="img/app_icon.png" itemprop="logo" />
 			</div>
 			
 			<div id="app-name">
-        <h1>Pilot<span>SSH</span></h1>
+        <h1><span itemprop="name">Pilot<span>SSH</span></span></h1>
 			</div>
 			
 			<div id="version">
@@ -103,22 +103,23 @@
         <li>Safe connections with libSSH2</li>
 				<li>As many servers as you want</li>
 			</ul>
-		
-			<div class="download-box">
-				<a href="https://itunes.apple.com/us/app/pilot-ssh/id591678815?l=fr&ls=1&mt=8"><img src="img/available-on-the-app-store.png"></a>
-			</div>
-			<div class="download-box">
-				<a href="#"><img class="overlay" src="img/android_app_on_play_logo_large.png"></a>
-			</div>
-      <div class="download-box">
-        <h3>Price: $4.99</h3>
-				<strong>Requirements:</strong><br>
-				Compatible with iPhone and iPod touch. Requires iPhone OS 5 or later. WiFi, Edge, or 3G network connection required.
-			</div>
-			<div class="download-box">
-				Available soon
-			</div>
-			
+
+      <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        <div class="download-box">
+          <a href="https://itunes.apple.com/us/app/pilot-ssh/id591678815?l=fr&ls=1&mt=8" itemprop="url"><img src="img/available-on-the-app-store.png"></a>
+        </div>
+        <div class="download-box">
+          <a href="#"><img class="overlay" src="img/android_app_on_play_logo_large.png"></a>
+        </div>
+        <div class="download-box">
+          <h3>Price: <span itemprop="price">$4.99</span></h3>
+          <strong>Requirements:</strong><br>
+          Compatible with iPhone and iPod touch. Requires iPhone OS 5 or later. WiFi, Edge, or 3G network connection required.
+        </div>
+			  <div class="download-box">
+			  	Available soon
+        </div>
+      </div>
 		</div>
 	</div>
 	
