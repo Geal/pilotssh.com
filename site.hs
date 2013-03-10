@@ -8,13 +8,17 @@ import           Hakyll
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
-    match "images/*" $ do
+    match "img/*" $ do
         route   idRoute
         compile copyFileCompiler
 
     match "css/*" $ do
         route   idRoute
         compile compressCssCompiler
+
+    match "js/*" $ do
+        route   idRoute
+        compile copyFileCompiler
 
     match (fromList ["about.rst", "contact.markdown"]) $ do
         route   $ setExtension "html"
@@ -42,8 +46,18 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 
-
     match "index.html" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match "github-btn.html" $ do
+        route   idRoute
+        compile copyFileCompiler
+    --match "blog/index.html" $ do
+    --    route   idRoute
+    --    compile copyFileCompiler
+
+    match "blog/index.html" $ do
         route idRoute
         compile $ do
             let indexCtx = field "posts" $ \_ -> postList (take 3 . recentFirst)
