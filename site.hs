@@ -7,7 +7,7 @@ import           Hakyll
 
 --------------------------------------------------------------------------------
 main :: IO ()
-main = hakyll $ do
+main = hakyllWith myConfiguration $ do
     match "img/*" $ do
         route   idRoute
         compile copyFileCompiler
@@ -29,6 +29,15 @@ main = hakyll $ do
         compile copyFileCompiler
 
     match "script/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    -- Copy favicon, htaccess...
+    match "data/*" $ do
+        route   $ gsubRoute "data/" (const "")
+        compile copyFileCompiler
+
+    match "faq.html" $ do
         route   idRoute
         compile copyFileCompiler
 
@@ -102,3 +111,12 @@ removeHtmlPrefix :: String -> String
 removeHtmlPrefix x = case (reverse . take 5 . reverse) $ x of
                      ".html" -> reverse . snd . splitAt 5 . reverse $ x
                      _       -> x
+
+-- Custom configuration
+
+myConfiguration :: Configuration
+myConfiguration = defaultConfiguration {ignoreFile = ignoreFile'}
+  where
+    ignoreFile' x
+        | x == "data/.htaccess" = False
+        | otherwise        = ignoreFile defaultConfiguration x
