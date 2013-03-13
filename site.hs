@@ -57,6 +57,7 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
+                >>= removeAllHtmlPrefix
 
     create ["index.html"] $ do
         route idRoute
@@ -88,3 +89,16 @@ postList sortFilter = do
     itemTpl <- loadBody "templates/post-item.html"
     list    <- applyTemplateList itemTpl postCtx posts
     return list
+
+--------------------------------------------------------------------------------
+removeAllHtmlPrefix :: Item String -> Compiler (Item String)
+removeAllHtmlPrefix item = do
+    route <- getRoute $ itemIdentifier item
+    return $ case route of
+        Nothing -> item
+        Just r  -> fmap (withUrls removeHtmlPrefix) item
+
+removeHtmlPrefix :: String -> String
+removeHtmlPrefix x = case (reverse . take 5 . reverse) $ x of
+                     ".html" -> reverse . snd . splitAt 5 . reverse $ x
+                     _       -> x
