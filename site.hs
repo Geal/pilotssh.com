@@ -46,9 +46,15 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 
-    match "index.html" $ do
-        route   idRoute
-        compile copyFileCompiler
+    create ["index.html"] $ do
+        route idRoute
+        compile $ do
+            let indexCtx = constField "title" "SSH for iPhone with Pilot SSH" `mappend` defaultContext
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/index.html" indexCtx
+                >>= loadAndApplyTemplate "templates/default.html" indexCtx
+                >>= relativizeUrls
+
 
     match "github-btn.html" $ do
         route   idRoute
