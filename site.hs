@@ -67,22 +67,8 @@ main = hakyll $ do
     match "github-btn.html" $ do
         route   idRoute
         compile copyFileCompiler
-    --match "blog/index.html" $ do
-    --    route   idRoute
-    --    compile copyFileCompiler
-
-    match "blog/index.html" $ do
-        route idRoute
-        compile $ do
-            let indexCtx = field "posts" $ \_ -> postList (take 3 . recentFirst)
-
-            getResourceBody
-                >>= applyAsTemplate indexCtx
-                >>= loadAndApplyTemplate "templates/default.html" postCtx
-                >>= relativizeUrls
 
     match "templates/*" $ compile templateCompiler
-
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
