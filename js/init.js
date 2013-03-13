@@ -1,12 +1,12 @@
 $(function(){
 	$(".thumbnails a.thumbnail").attr('rel', 'gallery').fancybox();
 
-	$("#nav-list li.scroll, #scroll_up").click(function(e) {
+	/*$("#nav-list li.scroll, #scroll_up").click(function(e) {
 		e.preventDefault();
 		 $('html, body').animate({
 				scrollTop: $($(this).children("a").attr("href")).offset().top
 		 },1500);
-	 });
+	 });*/
   //track outbound links
   var a = document.getElementsByTagName('a');
   for(i = 0; i < a.length; i++){
