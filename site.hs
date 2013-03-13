@@ -20,21 +20,29 @@ main = hakyll $ do
         route   idRoute
         compile copyFileCompiler
 
+    match "font/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match "fancybox/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
     match (fromList ["about.rst", "contact.markdown"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
-    match "posts/*" $ do
+    match "blog/*.markdown" $ do
         route $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
 
-    create ["archive.html"] $ do
-        route idRoute
+    create ["blog/index.html"] $ do
+        route $ idRoute
         compile $ do
             let archiveCtx =
                     field "posts" (\_ -> postList recentFirst) `mappend`
@@ -86,7 +94,7 @@ postCtx =
 --------------------------------------------------------------------------------
 postList :: ([Item String] -> [Item String]) -> Compiler String
 postList sortFilter = do
-    posts   <- sortFilter <$> loadAll "posts/*"
+    posts   <- sortFilter <$> loadAll "blog/*.markdown"
     itemTpl <- loadBody "templates/post-item.html"
     list    <- applyTemplateList itemTpl postCtx posts
     return list
