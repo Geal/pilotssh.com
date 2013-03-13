@@ -28,10 +28,6 @@ main = hakyllWith myConfiguration $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "script/*" $ do
-        route   idRoute
-        compile copyFileCompiler
-
     -- Copy favicon, htaccess...
     match "data/*" $ do
         route   $ gsubRoute "data/" (const "")
@@ -79,6 +75,13 @@ main = hakyllWith myConfiguration $ do
                 >>= loadAndApplyTemplate "templates/index.html" indexCtx
                 >>= loadAndApplyTemplate "templates/default.html" indexCtx
                 >>= relativizeUrls
+
+    match "script/*" $ do
+        route $ setExtension "html"
+        compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/script.html"  postCtx
+            >>= loadAndApplyTemplate "templates/default.html" postCtx
+            >>= relativizeUrls
 
 
     match "github-btn.html" $ do
