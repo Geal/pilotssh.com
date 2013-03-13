@@ -40,12 +40,6 @@ main = hakyllWith myConfiguration $ do
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
-    match (fromList ["about.rst", "contact.markdown"]) $ do
-        route   $ setExtension "html"
-        compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/default.html" defaultContext
-            >>= relativizeUrls
-
     match "blog/*.markdown" $ do
         route $ setExtension "html"
         compile $ pandocCompiler
