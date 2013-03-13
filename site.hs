@@ -37,9 +37,12 @@ main = hakyllWith myConfiguration $ do
         route   $ gsubRoute "data/" (const "")
         compile copyFileCompiler
 
-    match "faq.html" $ do
-        route   idRoute
-        compile copyFileCompiler
+    match "faq.markdown" $ do
+        route   $ setExtension "html"
+        compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/faq.html" defaultContext
+            >>= loadAndApplyTemplate "templates/default.html" defaultContext
+            >>= relativizeUrls
 
     match (fromList ["about.rst", "contact.markdown"]) $ do
         route   $ setExtension "html"
