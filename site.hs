@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-import           Control.Applicative ((<$>))
+import           Control.Applicative ((<$>), (<*>))
 import           Data.Monoid         (mappend)
 import           Data.Time.Clock
 import           Data.Time.Clock.POSIX
@@ -90,13 +90,8 @@ main = hakyllWith myConfiguration $ do
 
     match "templates/*" $ compile templateCompiler
 
-    create ["sitemap.xml"] $ do
-        route idRoute
-        compile $ do
-            let urlCtx = field "urls" (\_ -> urlList) `mappend` defaultContext
 
-            makeItem ""
-                >>= loadAndApplyTemplate "templates/sitemap.xml" urlCtx
+    createSitemap $ (++) <$> (loadAll "blog/*.markdown") <*> (loadAll "script/*")
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
@@ -124,32 +119,32 @@ removeHtmlPrefix x = case (reverse . take 5 . reverse) $ x of
                      ".html" -> reverse . snd . splitAt 5 . reverse $ x
                      _       -> x
 -------------------------------------------------------------------------------
-urlList ::  Compiler String
-urlList = do
-    --posts   <- loadAll "blog/*.markdown"
-    posts   <- loadAll "script/*"
-    --itemTpl <- loadBody "templates/sitemap_element.xml"
-    --list    <- applyTemplateList itemTpl urlCtx posts
-    --return list
+createSitemap :: Compiler [Item String] -> Rules ()
+createSitemap pages =
+    create ["sitemap.xml"] $ do
+        route idRoute
+        compile $ do
+            let urlCtx = field "urls" (\_ -> urlList pages) `mappend` defaultContext
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/sitemap.xml" urlCtx
+
+urlList :: Compiler [Item String] -> Compiler String
+urlList compPosts = do
+    posts <- compPosts
     applyUrlTemplateList posts
 
 applyUrlTemplateList :: [Item String] -> Compiler String
 applyUrlTemplateList posts = do
-    --posts' <- posts
     items  <- mapM applyUrlTemplate posts
     return $ concat $ intersperse "" $ map itemBody items
-    --return $ concat $ intersperse "" $ map itemBody items
-
 
 applyUrlTemplate :: Item String -> Compiler (Item String)
 applyUrlTemplate item = do
-    --item <- compItem
     tpl  <- urlTemplate item
     applyTemplate tpl urlCtx item
 
 urlTemplate ::  Item a -> Compiler Template
 urlTemplate item = do
-    --item      <- compItem
     metadata  <- getMetadata . itemIdentifier $ item
     case (M.lookup "image" metadata) of
          Nothing -> loadBody "templates/sitemap_element.xml"
