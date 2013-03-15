@@ -126,16 +126,17 @@ urlList = do
     return list
 
 getFullUrl :: String -> (Item a) -> Compiler String
-getFullUrl root path = do
-    mbPath <- getRoute.itemIdentifier $ path
+getFullUrl root item = do
+    mbPath <- getRoute.itemIdentifier $ item
     let fullUrl = case mbPath of
-          Nothing  -> ""
-          Just url ->  (root ++) . toUrl $ url
+         Nothing  -> ""
+         Just url ->  (root ++) . toUrl $ url
     return fullUrl
 
 urlCtx :: Context String
 urlCtx =
     (field "url" $ getFullUrl "http://pilotssh.com")
+    `mappend` dateField "last_modified" "%Y-%m-%dT%H:%M:%S+00:00"
     `mappend` dateField "date" "%B %e, %Y"
     `mappend` defaultContext
 

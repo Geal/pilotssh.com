@@ -1,5 +1,5 @@
 <url>
   <loc>$url$</loc>
-  <lastmod>$last_modified$<!--2013-02-01T15:40:29+00:00--></lastmod>
-  $image_element$
+  <lastmod>$last_modified$</lastmod>
+  <!--$image_element-->
 </url>
