@@ -1,6 +1,7 @@
 ---
 title: WordPress admin
 image: /img/wordpress.png
+imagecaption: backup the database, upgrade WordPress automatically
 link: https://github.com/Geal/PilotSSH-scripts/tree/master/wordpress
 ---
 

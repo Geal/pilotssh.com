@@ -1,6 +1,7 @@
 ---
 title: Uptime 
 image: /img/power.png
+imagecaption: see the server's uptime hald and reboot
 link: https://github.com/Geal/PilotSSH-scripts/tree/master/power
 ---
 

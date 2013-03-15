@@ -1,0 +1,8 @@
+<url>
+  <loc>$url$</loc>
+  <lastmod>$last_modified$</lastmod>
+  <image:image>
+    <image:loc>$image_url$</image:loc>
+    <image:caption>$imagecaption$</image:caption>
+  </image:image>
+</url>

@@ -1,6 +1,7 @@
 ---
 title: Process list
 image: /img/process_list.png
+imagecaption: list the processes, show their memory usage
 link: https://github.com/Geal/PilotSSH-scripts/tree/master/process
 ---
 

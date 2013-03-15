@@ -1,6 +1,7 @@
 ---
 title: Apache configuration
 image: /img/apache_sites.png
+imagecaption: Apache configuration interface
 link: https://github.com/Geal/PilotSSH-scripts/tree/master/apache
 ---
 

@@ -8,8 +8,9 @@ import           Data.Time.Format
 import           System.Posix.Files
 import           System.Locale
 import           Hakyll
-
-
+import           Hakyll.Core.Metadata
+import qualified Data.Map                       as M
+import           Data.List
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyllWith myConfiguration $ do
@@ -125,11 +126,35 @@ removeHtmlPrefix x = case (reverse . take 5 . reverse) $ x of
 -------------------------------------------------------------------------------
 urlList ::  Compiler String
 urlList = do
-    posts   <- loadAll "blog/*.markdown"
-    itemTpl <- loadBody "templates/sitemap_element.xml"
-    list    <- applyTemplateList itemTpl urlCtx posts
-    return list
+    --posts   <- loadAll "blog/*.markdown"
+    posts   <- loadAll "script/*"
+    --itemTpl <- loadBody "templates/sitemap_element.xml"
+    --list    <- applyTemplateList itemTpl urlCtx posts
+    --return list
+    applyUrlTemplateList posts
 
+applyUrlTemplateList :: [Item String] -> Compiler String
+applyUrlTemplateList posts = do
+    --posts' <- posts
+    items  <- mapM applyUrlTemplate posts
+    return $ concat $ intersperse "" $ map itemBody items
+    --return $ concat $ intersperse "" $ map itemBody items
+
+
+applyUrlTemplate :: Item String -> Compiler (Item String)
+applyUrlTemplate item = do
+    --item <- compItem
+    tpl  <- urlTemplate item
+    applyTemplate tpl urlCtx item
+
+urlTemplate ::  Item a -> Compiler Template
+urlTemplate item = do
+    --item      <- compItem
+    metadata  <- getMetadata . itemIdentifier $ item
+    case (M.lookup "image" metadata) of
+         Nothing -> loadBody "templates/sitemap_element.xml"
+         Just _  -> loadBody "templates/sitemap_element_with_image.xml"
+    
 getFullUrl :: String -> (Item a) -> Compiler String
 getFullUrl root item = do
     mbPath <- getRoute.itemIdentifier $ item
@@ -137,6 +162,13 @@ getFullUrl root item = do
          Nothing  -> ""
          Just url ->  (root ++) . toUrl $ url
     return fullUrl
+
+getImageFullUrl :: String -> (Item a) -> Compiler String
+getImageFullUrl root item = do
+    metadata <- getMetadata . itemIdentifier $ item
+    return $ case (M.lookup "image" metadata) of
+         Nothing -> ""
+         Just url -> root ++ url
 
 getModificationTime :: (Item a) -> Compiler String
 getModificationTime item = do
@@ -149,6 +181,7 @@ getModificationTime item = do
 urlCtx :: Context String
 urlCtx =
     (field "url" $ getFullUrl "http://pilotssh.com")
+    `mappend` (field "image_url" $ getImageFullUrl "http://pilotssh.com")
     `mappend` (field "last_modified" getModificationTime)
     `mappend` dateField "date" "%B %e, %Y"
     `mappend` defaultContext

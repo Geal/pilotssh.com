@@ -1,6 +1,7 @@
 ---
 title: Logs 
 image: /img/server_logs.png
+imagecaption: Logs display
 link: https://github.com/Geal/PilotSSH-scripts/tree/master/logs
 ---
 
