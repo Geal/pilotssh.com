@@ -84,12 +84,18 @@ main = hakyllWith myConfiguration $ do
 
     match "templates/*" $ compile templateCompiler
 
+    create ["sitemap.xml"] $ do
+        route idRoute
+        compile $ do
+            let urlCtx = field "urls" (\_ -> urlList) `mappend` defaultContext
+
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/sitemap.xml" urlCtx
+
 --------------------------------------------------------------------------------
 postCtx :: Context String
 postCtx =
-    dateField "date" "%B %e, %Y" `mappend`
-    defaultContext
-
+    dateField "date" "%B %e, %Y" `mappend` defaultContext
 
 --------------------------------------------------------------------------------
 postList :: ([Item String] -> [Item String]) -> Compiler String
@@ -111,6 +117,29 @@ removeHtmlPrefix :: String -> String
 removeHtmlPrefix x = case (reverse . take 5 . reverse) $ x of
                      ".html" -> reverse . snd . splitAt 5 . reverse $ x
                      _       -> x
+-------------------------------------------------------------------------------
+urlList ::  Compiler String
+urlList = do
+    posts   <- loadAll "blog/*.markdown"
+    itemTpl <- loadBody "templates/sitemap_element.xml"
+    list    <- applyTemplateList itemTpl urlCtx posts
+    return list
+
+getFullUrl :: String -> (Item a) -> Compiler String
+getFullUrl root path = do
+    mbPath <- getRoute.itemIdentifier $ path
+    let fullUrl = case mbPath of
+          Nothing  -> ""
+          Just url ->  (root ++) . toUrl $ url
+    return fullUrl
+
+urlCtx :: Context String
+urlCtx =
+    (field "url" $ getFullUrl "http://pilotssh.com")
+    `mappend` dateField "date" "%B %e, %Y"
+    `mappend` defaultContext
+
+-------------------------------------------------------------------------------
 
 -- Custom configuration
 

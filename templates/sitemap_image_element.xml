@@ -1,0 +1,4 @@
+<image:image>
+  <image:loc>$image_url$</image:loc>
+  <image:caption>$image_caption$</image:caption>
+</image:image>
