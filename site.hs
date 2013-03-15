@@ -155,7 +155,7 @@ getFullUrl root item = do
     mbPath <- getRoute.itemIdentifier $ item
     let fullUrl = case mbPath of
          Nothing  -> ""
-         Just url ->  (root ++) . toUrl $ url
+         Just url ->  removeHtmlPrefix . (root ++) . toUrl $ url
     return fullUrl
 
 getImageFullUrl :: String -> (Item a) -> Compiler String
