@@ -8,6 +8,10 @@
       <url>
         <loc>http://pilotssh.com</loc>
         <lastmod>2013-03-15T22:46:47+00:00</lastmod>
+          <image:image>
+            <image:loc>http://pilotssh.com/img/phones.png</image:loc>
+            <image:caption>SSH for iPhone - Pilot SSH</image:caption>
+          </image:image>
       </url>
       <url>
         <loc>http://pilotssh.com/faq</loc>
