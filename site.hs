@@ -2,6 +2,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Control.Applicative ((<$>))
 import           Data.Monoid         (mappend)
+import           Data.Time.Clock
+import           Data.Time.Clock.POSIX
+import           Data.Time.Format
+import           System.Posix.Files
+import           System.Locale
 import           Hakyll
 
 
@@ -133,10 +138,18 @@ getFullUrl root item = do
          Just url ->  (root ++) . toUrl $ url
     return fullUrl
 
+getModificationTime :: (Item a) -> Compiler String
+getModificationTime item = do
+    let filePath = toFilePath . itemIdentifier $ item
+    fileStatus <- unsafeCompiler . getFileStatus $ filePath
+    let modTime = posixSecondsToUTCTime . realToFrac . modificationTime $ fileStatus
+    let str = formatTime defaultTimeLocale "%Y-%m-%dT%H:%M:%S+00:00" modTime
+    return str
+
 urlCtx :: Context String
 urlCtx =
     (field "url" $ getFullUrl "http://pilotssh.com")
-    `mappend` dateField "last_modified" "%Y-%m-%dT%H:%M:%S+00:00"
+    `mappend` (field "last_modified" getModificationTime)
     `mappend` dateField "date" "%B %e, %Y"
     `mappend` defaultContext
 
