@@ -5,6 +5,17 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
       xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-
-$urls$    
+      <url>
+        <loc>http://pilotssh.com</loc>
+        <lastmod>2013-03-15T22:46:47+00:00</lastmod>
+      </url>
+      <url>
+        <loc>http://pilotssh.com/faq</loc>
+        <lastmod>2013-03-15T22:46:47+00:00</lastmod>
+      </url>
+      <url>
+        <loc>http://pilotssh.com/blog</loc>
+        <lastmod>2013-03-15T22:46:47+00:00</lastmod>
+      </url>
+$urls$
 </urlset>
