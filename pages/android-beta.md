@@ -1,5 +1,7 @@
 ---
 title: Pilot SSH, soon on Android
+image: /img/android.png
+imagecaption: Pilot SSH on Android beta
 ---
 
 # Pilot SSH, soon on Android
