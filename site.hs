@@ -99,9 +99,9 @@ postCtx =
     dateField "date" "%B %e, %Y" `mappend` defaultContext
 
 --------------------------------------------------------------------------------
-postList :: ([Item String] -> [Item String]) -> Compiler String
+postList :: ([Item String] -> Compiler [Item String]) -> Compiler String
 postList sortFilter = do
-    posts   <- sortFilter <$> loadAll "blog/*.markdown"
+    posts   <- sortFilter =<< loadAll "blog/*.markdown"
     itemTpl <- loadBody "templates/post-item.html"
     list    <- applyTemplateList itemTpl postCtx posts
     return list
