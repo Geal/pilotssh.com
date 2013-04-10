@@ -83,6 +83,13 @@ main = hakyllWith myConfiguration $ do
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
 
+    match "pages/*" $ do
+        route $ setExtension "html"
+        compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/page.html"  postCtx
+            >>= loadAndApplyTemplate "templates/default.html" postCtx
+            >>= relativizeUrls
+
 
     match "github-btn.html" $ do
         route   idRoute
@@ -91,7 +98,7 @@ main = hakyllWith myConfiguration $ do
     match "templates/*" $ compile templateCompiler
 
 
-    createSitemap $ (++) <$> (loadAll "blog/*.markdown") <*> (loadAll "script/*")
+    createSitemap $ (++) <$> ((++) <$> (loadAll "blog/*.markdown") <*> (loadAll "script/*")) <*> (loadAll "pages/*")
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
