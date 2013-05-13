@@ -6,9 +6,9 @@ imagecaption: Pilot SSH on Android beta
 
 # Pilot SSH, soon on Android
 
-Following the release of the [iPhone version of Pilot SSH](https://itunes.apple.com/us/app/pilot-ssh/id591678815?l=fr&ls=1&mt=8) and the encouraging messages I received, I started working on the Android version. It builds upon what I learned building and promoting the iphone version. For now, the goal is to obtain the same features on both versions, then add new ones on both platforms at the same time.
-
 ![Manage your processes](/img/android.png)
+
+Following the release of the [iPhone version of Pilot SSH](https://itunes.apple.com/us/app/pilot-ssh/id591678815?l=fr&ls=1&mt=8) and the encouraging messages I received, I started working on the Android version. It builds upon what I learned building and promoting the iphone version. For now, the goal is to obtain the same features on both versions, then add new ones on both platforms at the same time.
 
 ## Security
 

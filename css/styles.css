@@ -150,7 +150,28 @@ h2 {
   filter: alpha(opacity=20); /* msie */
   background-color: #000;
 }
-	
+
+/*****    PAGE    *****/
+#page h2 {
+  clear: both;
+  margin-bottom: 20px;
+}
+
+.figure {
+  margin: 0 20px 0 20px;
+}
+
+#page .figure:nth-child(odd){
+  float: left;
+  clear: left;
+  margin-left: 70px;
+}
+
+#page .figure:nth-child(even){
+  float: right;
+  clear: right;
+  margin-right: 70px;
+}
 /***** ABOUT PAGE *****/
 
 .updates ul {
