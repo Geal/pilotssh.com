@@ -65,7 +65,7 @@ main = hakyllWith myConfiguration $ do
                 >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
-                >>= removeAllHtmlPrefix
+                >>= removeAllHtmlSuffix
 
     create ["index.html"] $ do
         route idRoute
@@ -114,15 +114,15 @@ postList sortFilter = do
     return list
 
 --------------------------------------------------------------------------------
-removeAllHtmlPrefix :: Item String -> Compiler (Item String)
-removeAllHtmlPrefix item = do
+removeAllHtmlSuffix :: Item String -> Compiler (Item String)
+removeAllHtmlSuffix item = do
     route <- getRoute $ itemIdentifier item
     return $ case route of
         Nothing -> item
-        Just r  -> fmap (withUrls removeHtmlPrefix) item
+        Just r  -> fmap (withUrls removeHtmlSuffix) item
 
-removeHtmlPrefix :: String -> String
-removeHtmlPrefix x = case (reverse . take 5 . reverse) $ x of
+removeHtmlSuffix :: String -> String
+removeHtmlSuffix x = case (reverse . take 5 . reverse) $ x of
                      ".html" -> reverse . snd . splitAt 5 . reverse $ x
                      _       -> x
 -------------------------------------------------------------------------------
@@ -162,7 +162,7 @@ getFullUrl root item = do
     mbPath <- getRoute.itemIdentifier $ item
     let fullUrl = case mbPath of
          Nothing  -> ""
-         Just url ->  removeHtmlPrefix . (root ++) . toUrl $ url
+         Just url ->  removeHtmlSuffix . (root ++) . toUrl $ url
     return fullUrl
 
 getImageFullUrl :: String -> (Item a) -> Compiler String
