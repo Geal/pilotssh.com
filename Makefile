@@ -4,7 +4,7 @@ build: hakyll
 	./site build
 
 hakyll: site.hs
-	ghc --make site.hs
+	export GHC_PACKAGE_PATH=/usr/local/Cellar/ghc/7.4.2/lib/ghc-7.4.2/package.conf.d/:/Users/geoffroycouprie/dev/ios/pilotssh.com/cabal-dev/packages-7.4.2.conf/ && ghc --make site.hs
 	./site clean
 
 new:
