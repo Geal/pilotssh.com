@@ -2,15 +2,10 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Control.Applicative ((<$>), (<*>))
 import           Data.Monoid         (mappend)
-import           Data.Time.Clock
-import           Data.Time.Clock.POSIX
-import           Data.Time.Format
-import           System.Posix.Files
-import           System.Locale
 import           Hakyll
 import           Hakyll.Core.Metadata
-import qualified Data.Map                       as M
-import           Data.List
+import           UrlFixer
+import           Sitemap
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyllWith myConfiguration $ do
@@ -98,7 +93,7 @@ main = hakyllWith myConfiguration $ do
     match "templates/*" $ compile templateCompiler
 
 
-    createSitemap $ loadAll ("blog/*.markdown" .||. "script/*" .||. "pages/*")
+    createSitemap "sitemap.xml" $ loadAll ("blog/*.markdown" .||. "script/*" .||. "pages/*")
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
@@ -112,81 +107,6 @@ postList sortFilter = do
     itemTpl <- loadBody "templates/post-item.html"
     list    <- applyTemplateList itemTpl postCtx posts
     return list
-
---------------------------------------------------------------------------------
-removeAllHtmlSuffix :: Item String -> Compiler (Item String)
-removeAllHtmlSuffix item = do
-    route <- getRoute $ itemIdentifier item
-    return $ case route of
-        Nothing -> item
-        Just r  -> fmap (withUrls removeHtmlSuffix) item
-
-removeHtmlSuffix :: String -> String
-removeHtmlSuffix x = case (reverse . take 5 . reverse) $ x of
-                     ".html" -> reverse . snd . splitAt 5 . reverse $ x
-                     _       -> x
--------------------------------------------------------------------------------
-createSitemap :: Compiler [Item String] -> Rules ()
-createSitemap pages =
-    create ["sitemap.xml"] $ do
-        route idRoute
-        compile $ do
-            let urlCtx = field "urls" (\_ -> urlList pages) `mappend` defaultContext
-            makeItem ""
-                >>= loadAndApplyTemplate "templates/sitemap.xml" urlCtx
-
-urlList :: Compiler [Item String] -> Compiler String
-urlList compPosts = do
-    posts <- compPosts
-    applyUrlTemplateList posts
-
-applyUrlTemplateList :: [Item String] -> Compiler String
-applyUrlTemplateList posts = do
-    items  <- mapM applyUrlTemplate posts
-    return $ concat $ intersperse "" $ map itemBody items
-
-applyUrlTemplate :: Item String -> Compiler (Item String)
-applyUrlTemplate item = do
-    tpl  <- urlTemplate item
-    applyTemplate tpl urlCtx item
-
-urlTemplate ::  Item a -> Compiler Template
-urlTemplate item = do
-    metadata  <- getMetadata . itemIdentifier $ item
-    case (M.lookup "image" metadata) of
-         Nothing -> loadBody "templates/sitemap_element.xml"
-         Just _  -> loadBody "templates/sitemap_element_with_image.xml"
-    
-getFullUrl :: String -> (Item a) -> Compiler String
-getFullUrl root item = do
-    mbPath <- getRoute.itemIdentifier $ item
-    let fullUrl = case mbPath of
-         Nothing  -> ""
-         Just url ->  removeHtmlSuffix . (root ++) . toUrl $ url
-    return fullUrl
-
-getImageFullUrl :: String -> (Item a) -> Compiler String
-getImageFullUrl root item = do
-    metadata <- getMetadata . itemIdentifier $ item
-    return $ case (M.lookup "image" metadata) of
-         Nothing -> ""
-         Just url -> root ++ url
-
-getModificationTime :: (Item a) -> Compiler String
-getModificationTime item = do
-    let filePath = toFilePath . itemIdentifier $ item
-    fileStatus <- unsafeCompiler . getFileStatus $ filePath
-    let modTime = posixSecondsToUTCTime . realToFrac . modificationTime $ fileStatus
-    let str = formatTime defaultTimeLocale "%Y-%m-%dT%H:%M:%S+00:00" modTime
-    return str
-
-urlCtx :: Context String
-urlCtx =
-    (field "url" $ getFullUrl "http://pilotssh.com")
-    `mappend` (field "image_url" $ getImageFullUrl "http://pilotssh.com")
-    `mappend` (field "last_modified" getModificationTime)
-    `mappend` dateField "date" "%B %e, %Y"
-    `mappend` defaultContext
 
 -------------------------------------------------------------------------------
 
