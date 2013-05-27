@@ -98,7 +98,7 @@ main = hakyllWith myConfiguration $ do
     match "templates/*" $ compile templateCompiler
 
 
-    createSitemap $ (++) <$> ((++) <$> (loadAll "blog/*.markdown") <*> (loadAll "script/*")) <*> (loadAll "pages/*")
+    createSitemap $ loadAll ("blog/*.markdown" .||. "script/*" .||. "pages/*")
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
